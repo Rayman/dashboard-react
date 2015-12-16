@@ -1,0 +1,55 @@
+{
+  "private": true,
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "build": "browserify src/index.js -o app/bundle.js -d",
+    "watch": "watchify src/index.js -o app/bundle.js -dv",
+    "serve": "browser-sync start --files app/*.js app/styles/*.css --server app",
+    "dev": "concurrent \"npm run serve\" \"npm run watch\""
+  },
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "eslint:recommended"
+    ],
+    "env": {
+      "node": true,
+      "browser": true,
+      "es6": true,
+      "jquery": true,
+      "mocha": true
+    },
+    "rules": {
+      "quotes": [
+        2,
+        "single"
+      ],
+      "indent": [
+        2,
+        2
+      ]
+    }
+  },
+  "dependencies": {
+    "material-ui": "^0.13.4",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3",
+    "react-tap-event-plugin": "^0.2.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.3.17",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babelify": "^7.2.0",
+    "browser-sync": "^2.10.1",
+    "browserify": "^12.0.1",
+    "concurrently": "^1.0.0",
+    "watchify": "^3.6.1"
+  }
+}
