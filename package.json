@@ -4,7 +4,8 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "build": "browserify src/index.js -o app/bundle.js -d",
+    "build": "browserify src/index.js -d | exorcist app/bundle.js.map > app/bundle.js",
+    "postbuild": "sh -c 'test -s app/bundle.js'",
     "watch": "watchify src/index.js -o app/bundle.js -dv",
     "serve": "browser-sync start --files app/*.js app/styles/*.css --server app",
     "dev": "concurrent \"npm run serve\" \"npm run watch\""
@@ -50,6 +51,7 @@
     "browser-sync": "^2.10.1",
     "browserify": "^12.0.1",
     "concurrently": "^1.0.0",
+    "exorcist": "^0.4.0",
     "watchify": "^3.6.1"
   }
 }
