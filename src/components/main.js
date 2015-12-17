@@ -38,7 +38,7 @@ const Main = React.createClass({
 
   componentWillMount() {
     let newMuiTheme = ThemeManager.modifyRawThemePalette(this.state.muiTheme, {
-      accent1Color: Colors.deepOrange500,
+      // accent1Color: Colors.deepOrange500,
     });
 
     this.setState({muiTheme: newMuiTheme});
