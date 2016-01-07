@@ -4,8 +4,11 @@
     "node": ">=0.10.0"
   },
   "scripts": {
+    "lint": "xo",
     "wiredep": "wiredep --exclude /robot-api/ --src app/index.html",
-    "build": "browserify src/index.js -d | exorcist app/bundle.js.map > app/bundle.js",
+    "prebuild": "npm run lint",
+    "build": "npm run build_browser",
+    "build_browser": "browserify src/index.js -d | exorcist app/bundle.js.map > app/bundle.js",
     "postbuild": "sh -c 'test -s app/bundle.js'",
     "watch": "watchify src/index.js -o app/bundle.js -dv",
     "serve": "browser-sync start --files app/*.js app/styles/*.css --server app",
@@ -16,26 +19,18 @@
       "babelify"
     ]
   },
-  "eslintConfig": {
-    "extends": [
-      "eslint:recommended"
+  "xo": {
+    "extends": "xo-react",
+    "esnext": true,
+    "space": true,
+    "envs": [
+      "browser"
     ],
-    "env": {
-      "node": true,
-      "browser": true,
-      "es6": true,
-      "jquery": true,
-      "mocha": true
-    },
+    "ignores": [
+      "app/**"
+    ],
     "rules": {
-      "quotes": [
-        2,
-        "single"
-      ],
-      "indent": [
-        2,
-        2
-      ]
+          "react/jsx-indent-props": [2, "space"]
     }
   },
   "dependencies": {
@@ -55,8 +50,11 @@
     "browserify": "^12.0.1",
     "browserify-shim": "^3.8.11",
     "concurrently": "^1.0.0",
+    "eslint-config-xo-react": "^0.3.0",
+    "eslint-plugin-react": "^3.14.0",
     "exorcist": "^0.4.0",
     "watchify": "^3.6.1",
-    "wiredep": "^3.0.0"
+    "wiredep": "^3.0.0",
+    "xo": "^0.12.1"
   }
 }

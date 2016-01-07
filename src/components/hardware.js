@@ -1,16 +1,13 @@
-import React, { Component, PropTypes } from 'react'
+import React, {Component} from 'react';
 
 import HardwareStatusButton from './hardware-status-button';
 
 import robot from '../robot';
-import { Hardware } from 'robot-api';
-
-window.h = Hardware.levels;
-
+import {Hardware} from 'robot-api';
 
 const LevelMap = {};
 
-for (const level in Hardware.levels) {
+for (const level of Hardware.levels) {
   LevelMap[Hardware.levels[level]] = level.toLowerCase();
 }
 
@@ -20,13 +17,13 @@ export default class HardwareContainer extends Component {
     super(props);
   }
 
-  onStatus = (status) => {
+  onStatus = status => {
     this.setState(status);
   };
 
   onClick(name) {
     console.log('click', name);
-  };
+  }
 
   componentWillMount() {
     this.setState(robot.hardware.status);
@@ -43,9 +40,14 @@ export default class HardwareContainer extends Component {
   render() {
     return (
       <div>
-        {Object.keys(this.state).map((name) => {
-          const { level } = this.state[name]
-          return <HardwareStatusButton key={name} bodyPart={name} status={LevelMap[level]} onClick={ this.onClick.bind(this, name) } />
+        {Object.keys(this.state).map(name => {
+          const {level} = this.state[name];
+          return (
+            <HardwareStatusButton key={name}
+                bodyPart={name} status={LevelMap[level]}
+                onClick={this.onClick.bind(this, name)}
+                />
+          );
         })}
       </div>
     );
