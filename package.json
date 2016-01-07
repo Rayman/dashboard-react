@@ -8,15 +8,19 @@
     "wiredep": "wiredep --exclude /robot-api/ --src app/index.html",
     "prebuild": "npm run lint",
     "build": "npm run build_browser",
-    "build_browser": "browserify src/index.js -d | exorcist app/bundle.js.map > app/bundle.js",
-    "postbuild": "sh -c 'test -s app/bundle.js'",
+    "build_browser": "NODE_ENV=production browserify -p bundle-collapser/plugin src/index.js -d | exorcist app/bundle.js.map | derequire > app/bundle.js",
+    "analyze": "NODE_ENV=production browserify -p bundle-collapser/plugin src/index.js --full-paths | derequire | uglifyjs -c -m | discify -o app/bundle.min.html",
+    "postbuild": "sh -c 'test -s app/bundle.js' && npm run minify",
+    "minify": "uglifyjs app/bundle.js --in-source-map app/bundle.js.map -c -m -o app/bundle.min.js --source-map=app/bundle.min.js.map",
     "watch": "watchify src/index.js -o app/bundle.js -dv",
     "serve": "browser-sync start --files app/*.js app/styles/*.css --server app",
     "dev": "concurrent \"npm run serve\" \"npm run watch\""
   },
   "browserify": {
     "transform": [
-      "babelify"
+      "babelify",
+      "envify",
+      "uglifyify"
     ]
   },
   "xo": {
@@ -53,10 +57,15 @@
     "browser-sync": "^2.10.1",
     "browserify": "^12.0.1",
     "browserify-shim": "^3.8.11",
+    "bundle-collapser": "^1.2.1",
     "concurrently": "^1.0.0",
+    "derequire": "^2.0.3",
+    "disc": "^1.3.2",
+    "envify": "^3.4.0",
     "eslint-config-xo-react": "^0.3.0",
     "eslint-plugin-react": "^3.14.0",
     "exorcist": "^0.4.0",
+    "uglifyify": "^3.0.1",
     "watchify": "^3.6.1",
     "wiredep": "^3.0.0",
     "xo": "^0.12.1"
