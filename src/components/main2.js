@@ -11,15 +11,7 @@ import ActionAndroid from 'material-ui/lib/svg-icons/action/android.js';
 import IconButton from 'material-ui/lib/icon-button';
 import FloatingActionButton from 'material-ui/lib/floating-action-button';
 
-import HardwareStatusButton from './hardware-status-button';
-
-const HardwareStatus = {
-  STALE: 0,
-  IDLE: 1,
-  OPERATIONAL: 2,
-  HOMING: 3,
-  ERROR: 4
-};
+import HardwareContainer from './hardware';
 
 const Main = React.createClass({
 
@@ -30,7 +22,6 @@ const Main = React.createClass({
   getInitialState() {
     return {
       muiTheme: ThemeManager.getMuiTheme(LightRawTheme),
-      allStatus: HardwareStatus.OPERATIONAL,
     };
   },
 
@@ -51,12 +42,7 @@ const Main = React.createClass({
   render() {
     return (
       <div>
-        <HardwareStatusButton bodyPart="all"        status='stale'/>
-        <HardwareStatusButton bodyPart="base"       status='idle'/>
-        <HardwareStatusButton bodyPart="spindle"    status='operational'/>
-        <HardwareStatusButton bodyPart="left_arm"   status='homing'/>
-        <HardwareStatusButton bodyPart="right_arm"  status='error'/>
-        <HardwareStatusButton bodyPart="head"       status='idle'/>
+        <HardwareContainer/>
       </div>
     );
   },

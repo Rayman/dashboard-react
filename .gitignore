@@ -1,5 +1,6 @@
 node_modules
 dist
 app/bundle.js
+app/bundle.js.map
 .tmp
 bower_components

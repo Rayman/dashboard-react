@@ -1,6 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
+
 import injectTapEventPlugin from 'react-tap-event-plugin';
+
 import Main from './components/main2'; // Our custom react component
 
 //Needed for onTouchTap
@@ -11,4 +13,7 @@ injectTapEventPlugin();
 
 // Render the main app react component into the app div.
 // For more details see: https://facebook.github.io/react/docs/top-level-api.html#react.render
-ReactDOM.render(<Main />, document.getElementById('app'));
+render(
+  <Main />
+  , document.getElementById('app')
+);

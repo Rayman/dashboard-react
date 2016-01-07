@@ -2,5 +2,6 @@
   "name": "dashboard",
   "private": true,
   "dependencies": {
+    "robot-api": "~0.5.1"
   }
 }

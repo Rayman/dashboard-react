@@ -38,7 +38,8 @@ const HardwareStatusButton = React.createClass({
   render() {
     const Icon = iconMap[this.props.bodyPart];
     return (
-      <FloatingActionButton mini={true} backgroundColor={levelColorMap[this.props.status]}>
+      <FloatingActionButton mini={true} backgroundColor={levelColorMap[this.props.status]}
+          onMouseDown={this.props.onClick}>
         <Icon />
       </FloatingActionButton>
     );
