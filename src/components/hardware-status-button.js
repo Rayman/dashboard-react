@@ -30,22 +30,20 @@ const iconMap = {
 };
 
 class HardwareStatusButton extends Component {
+  static propTypes = {
+    bodyPart: PropTypes.string.isRequired,
+    status:   PropTypes.string.isRequired
+  };
+
   render() {
-    const Icon = iconMap[this.props.bodyPart];
+    const {bodyPart, status, ...other} = this.props;
+    const Icon = iconMap[bodyPart];
     return (
-      <FloatingActionButton mini backgroundColor={levelColorMap[this.props.status]}
-          onMouseDown={this.props.onClick}
-          >
+      <FloatingActionButton {...other} mini backgroundColor={levelColorMap[status]} >
         <Icon />
       </FloatingActionButton>
     );
   }
 }
-
-HardwareStatusButton.propTypes = {
-  bodyPart: PropTypes.number,
-  status:   PropTypes.number,
-  onClick:  PropTypes.number
-};
 
 export default HardwareStatusButton;

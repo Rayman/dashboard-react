@@ -7,7 +7,7 @@ import {Hardware} from 'robot-api';
 
 const LevelMap = {};
 
-for (const level of Hardware.levels) {
+for (const level of Object.keys(Hardware.levels)) {
   LevelMap[Hardware.levels[level]] = level.toLowerCase();
 }
 
@@ -21,7 +21,7 @@ export default class HardwareContainer extends Component {
     this.setState(status);
   };
 
-  onClick(name) {
+  onTouchTap(name) {
     console.log('click', name);
   }
 
@@ -45,7 +45,7 @@ export default class HardwareContainer extends Component {
           return (
             <HardwareStatusButton key={name}
                 bodyPart={name} status={LevelMap[level]}
-                onClick={this.onClick.bind(this, name)}
+                onTouchTap={this.onTouchTap.bind(this, name)}
                 />
           );
         })}
